@@ -1,6 +1,6 @@
-.import source "64spec.asm"
+.import source "128spec.asm"
 
-.eval config_64spec("print_immediate_result", false)
+.eval config_128spec("print_immediate_result", false)
 sfspec: :init_spec()
 
   :describe("assert_a_equal")
@@ -14,7 +14,7 @@ sfspec: :init_spec()
         :assert_a_equal #expected
       } else {
         lda #a
-        :assert_a_equal #expected: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+        :assert_a_equal #expected: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
       }
     }
   }
@@ -28,7 +28,7 @@ sfspec: :init_spec()
       .if (a == expected) {
         :assert_a_equal #expected
       } else {
-        :assert_a_equal #expected: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+        :assert_a_equal #expected: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
       }
       :assert_a_equal #a
     }
@@ -37,7 +37,7 @@ sfspec: :init_spec()
     ldx #7
     lda #5
     :assert_a_equal #5
-    :assert_a_equal #6: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_a_equal #6: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
     :assert_x_equal #7
 
 
@@ -46,7 +46,7 @@ sfspec: :init_spec()
 
     lda #68
     :assert_a_equal #68
-    :assert_a_equal #69: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_a_equal #69: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
     :assert_y_equal #9
 
@@ -62,7 +62,7 @@ sfspec: :init_spec()
     plp
 
     :assert_a_equal #68
-    :assert_a_equal #69: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_a_equal #69: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
     :assert_p_equal tmp
 

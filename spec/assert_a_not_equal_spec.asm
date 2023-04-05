@@ -1,6 +1,6 @@
-.import source "64spec.asm"
+.import source "128spec.asm"
 
-.eval config_64spec("print_immediate_result", false)
+.eval config_128spec("print_immediate_result", false)
 sfspec: :init_spec()
   :describe("assert_a_not_equal")
 
@@ -13,7 +13,7 @@ sfspec: :init_spec()
         :assert_a_not_equal #expected
       } else {
         lda #a
-        :assert_a_not_equal #expected: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+        :assert_a_not_equal #expected: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
       }
     }
   }
@@ -27,7 +27,7 @@ sfspec: :init_spec()
       .if (a != expected) {
         :assert_a_not_equal #expected
       } else {
-        :assert_a_not_equal #expected: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+        :assert_a_not_equal #expected: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
       }
       :assert_a_equal #a
     }

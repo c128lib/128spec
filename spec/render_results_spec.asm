@@ -1,9 +1,9 @@
-.import source "64spec.asm"
-.import source "64core/kernal.asm"
-.import source "64core/memory.asm"
+.import source "128spec.asm"
+.import source "128core/kernal.asm"
+.import source "128core/memory.asm"
 .const COLOR_RAM = $d800
 
-.eval config_64spec("change_character_set", false)
+.eval config_128spec("change_character_set", false)
 // TODO: try printing on a different screen to not screw up test results.
 sfspec: :init_spec()
 

@@ -1,6 +1,6 @@
-.import source "64spec.asm"
+.import source "128spec.asm"
 
-.eval config_64spec("print_immediate_result", false)
+.eval config_128spec("print_immediate_result", false)
 sfspec: :init_spec()
 
   :describe("assert_xy_equal")
@@ -15,7 +15,7 @@ sfspec: :init_spec()
       .if (x == expected) {
         :assert_xy_equal
       } else {
-        :assert_xy_equal _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+        :assert_xy_equal _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
       }
     }
   }
@@ -28,7 +28,7 @@ sfspec: :init_spec()
     ldy #x
     :assert_xy_equal
     ldy #x + 1
-    :assert_xy_equal _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_xy_equal _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
     :assert_x_equal #x
 
   :it("does not affect Y register")
@@ -39,7 +39,7 @@ sfspec: :init_spec()
     ldx #y
     :assert_xy_equal
     ldx #y + 1
-    :assert_xy_equal _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_xy_equal _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
     :assert_y_equal #y
 
   :it("does not affect A register")
@@ -48,7 +48,7 @@ sfspec: :init_spec()
     ldy #7
     :assert_xy_equal
     ldy #6
-    :assert_xy_equal _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_xy_equal _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
     :assert_a_equal #5
 
   :it("does not affect Status register")
@@ -70,7 +70,7 @@ sfspec: :init_spec()
     pha
     ldx #69
     plp
-    :assert_xy_equal _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_xy_equal _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
 
   :finish_spec()

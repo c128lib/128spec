@@ -1,28 +1,28 @@
-.import source "64spec.asm"
+.import source "128spec.asm"
 
-.eval config_64spec("print_immediate_result", false)
+.eval config_128spec("print_immediate_result", false)
 sfspec: :init_spec()
 
   :describe("assert_unsigned_less_or_equal")
 
   :it("works for edge cases"); {
     :assert_unsigned_less #0: #1
-    :assert_unsigned_less #1: #0: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_unsigned_less #1: #0: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
     :assert_unsigned_less #1: #2
-    :assert_unsigned_less #2: #1: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_unsigned_less #2: #1: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
     :assert_unsigned_less #0: #255
-    :assert_unsigned_less #255: #0: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_unsigned_less #255: #0: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
-    :assert_unsigned_less #0: #0: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
-    :assert_unsigned_less #5: #5: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
-    :assert_unsigned_less #255: #255: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_unsigned_less #0: #0: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
+    :assert_unsigned_less #5: #5: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
+    :assert_unsigned_less #255: #255: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
   }
 
   :it("works for same values"); {
     .for (var b = 0;b < 256; b++) {
-      :assert_unsigned_less #b: #b: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+      :assert_unsigned_less #b: #b: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
     }
   }
   :it("works for different values"); {
@@ -31,9 +31,9 @@ sfspec: :init_spec()
     .for (var b = 0;b < 256; b++) {
       .if (a < b) {
         :assert_unsigned_less #a: #b
-        :assert_unsigned_less #b: #a: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+        :assert_unsigned_less #b: #a: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
       } else .if (a > b) {
-        :assert_unsigned_less #a: #b: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+        :assert_unsigned_less #a: #b: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
         :assert_unsigned_less #b: #a
       }
     }
@@ -43,8 +43,8 @@ sfspec: :init_spec()
     lda #5
 
     :assert_unsigned_less #4: #6
-    :assert_unsigned_less #6: #4: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
-    :assert_unsigned_less #6: #6: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_unsigned_less #6: #4: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
+    :assert_unsigned_less #6: #6: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
     :assert_a_equal #5
 
@@ -52,8 +52,8 @@ sfspec: :init_spec()
     ldx #5
 
     :assert_unsigned_less #4: #6
-    :assert_unsigned_less #6: #4: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
-    :assert_unsigned_less #6: #6: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_unsigned_less #6: #4: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
+    :assert_unsigned_less #6: #6: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
     :assert_x_equal #5
 
@@ -61,8 +61,8 @@ sfspec: :init_spec()
     ldy #5
 
     :assert_unsigned_less #4: #6
-    :assert_unsigned_less #6: #4: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
-    :assert_unsigned_less #6: #6: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_unsigned_less #6: #4: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
+    :assert_unsigned_less #6: #6: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
     :assert_y_equal #5
 
@@ -74,8 +74,8 @@ sfspec: :init_spec()
     plp
 
     :assert_unsigned_less #4: #6
-    :assert_unsigned_less #6: #4: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
-    :assert_unsigned_less #6: #6: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_unsigned_less #6: #4: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
+    :assert_unsigned_less #6: #6: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
     :assert_p_equal tmp
 

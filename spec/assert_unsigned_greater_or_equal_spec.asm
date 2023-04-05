@@ -1,18 +1,18 @@
-.import source "64spec.asm"
+.import source "128spec.asm"
 
-.eval config_64spec("print_immediate_result", false)
+.eval config_128spec("print_immediate_result", false)
 sfspec: :init_spec()
 
   :describe("assert_unsigned_greater_or_equal")
 
   :it("works for edge cases"); {
     :assert_unsigned_greater_or_equal #1: #0
-    :assert_unsigned_greater_or_equal #0: #1: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_unsigned_greater_or_equal #0: #1: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
     :assert_unsigned_greater_or_equal #2: #1
-    :assert_unsigned_greater_or_equal #1: #2: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_unsigned_greater_or_equal #1: #2: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
     :assert_unsigned_greater_or_equal  #255: #0
-    :assert_unsigned_greater_or_equal #0: #255: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_unsigned_greater_or_equal #0: #255: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
     :assert_unsigned_greater_or_equal #0: #0
     :assert_unsigned_greater_or_equal #5: #5
@@ -31,9 +31,9 @@ sfspec: :init_spec()
     .for (var b = 0;b < 256; b++) {
       .if (a > b) {
         :assert_unsigned_greater_or_equal #a: #b
-        :assert_unsigned_greater_or_equal #b: #a: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+        :assert_unsigned_greater_or_equal #b: #a: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
       } else .if (a < b) {
-        :assert_unsigned_greater_or_equal #a: #b: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+        :assert_unsigned_greater_or_equal #a: #b: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
         :assert_unsigned_greater_or_equal #b: #a
       }
     }
@@ -44,7 +44,7 @@ sfspec: :init_spec()
 
     :assert_unsigned_greater_or_equal #6: #4
     :assert_unsigned_greater_or_equal #6: #6
-    :assert_unsigned_greater_or_equal #4: #6: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_unsigned_greater_or_equal #4: #6: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
     :assert_a_equal #5
 
@@ -53,7 +53,7 @@ sfspec: :init_spec()
 
     :assert_unsigned_greater_or_equal #6: #4
     :assert_unsigned_greater_or_equal #6: #6
-    :assert_unsigned_greater_or_equal #4: #6: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_unsigned_greater_or_equal #4: #6: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
     :assert_x_equal #5
 
@@ -62,7 +62,7 @@ sfspec: :init_spec()
 
     :assert_unsigned_greater_or_equal #6: #4
     :assert_unsigned_greater_or_equal #6: #6
-    :assert_unsigned_greater_or_equal #4: #6: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_unsigned_greater_or_equal #4: #6: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
     :assert_y_equal #5
 
@@ -75,7 +75,7 @@ sfspec: :init_spec()
 
     :assert_unsigned_greater_or_equal #6: #4
     :assert_unsigned_greater_or_equal #6: #6
-    :assert_unsigned_greater_or_equal #4: #6: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_unsigned_greater_or_equal #4: #6: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
     :assert_p_equal tmp
 

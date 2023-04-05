@@ -1,30 +1,30 @@
-# 64spec
+# 128spec
 
-6502/Commodore64 Testing Framework for KickAssembler
+6502/Commodore128 Testing Framework for KickAssembler
 
 ## Video introduction
 
-[![Video](docs/022.png?raw=true)](http://64bites.com/episodes/022-tdd-with-64spec/)
+[![Video](docs/022.png?raw=true)](http://64bites.com/episodes/022-tdd-with-128spec/)
 ## Installation
 
 ### Recommended way
 
 1. Create a dir for libraries that your KickAssembler projects use.
-2. Get the current version of the 64spec.asm file and put it in this dir along with other libraries. 
-3. Import it in your spec files as <code>.import source "64spec.asm"</code>
+2. Get the current version of the 128spec.asm file and put it in this dir along with other libraries. 
+3. Import it in your spec files as <code>.import source "128spec.asm"</code>
 4. Make sure to pass option <code>-libdir <path-to-your-libraries-dir></code> when compiling with KickAssembler.
 
 ### If you just want to try it out
 
-1. Get the current version of the 64spec.asm file and put it in the same directory as your spec files.
-2. Import it in your spec files as <code>.import source "64spec.asm"</code>
+1. Get the current version of the 128spec.asm file and put it in the same directory as your spec files.
+2. Import it in your spec files as <code>.import source "128spec.asm"</code>
 
 ## Quick Start
 
 #### 1. Create file example_spec.asm
 
 ``` asm
-.import source "64spec.asm"
+.import source "128spec.asm"
 
 sfspec: :init_spec()
   
@@ -38,7 +38,7 @@ sfspec: :init_spec()
 #### 2. Add first failing assertion.
 
 ``` asm
-.import source "64spec.asm"
+.import source "128spec.asm"
 
 sfspec: :init_spec()
   
@@ -52,7 +52,7 @@ sfspec: :init_spec()
 #### 3. Make it pass
 
 ``` asm
-.import source "64spec.asm"
+.import source "128spec.asm"
 
 sfspec: :init_spec()
 

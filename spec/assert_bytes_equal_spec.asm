@@ -1,8 +1,8 @@
-.import source "64spec.asm"
-.import source "64core/memory.asm"
-.import source "64core/math.asm"
+.import source "128spec.asm"
+.import source "128core/memory.asm"
+.import source "128core/math.asm"
 
-.eval config_64spec("print_immediate_result", false)
+.eval config_128spec("print_immediate_result", false)
 sfspec: :init_spec()
   
   :describe("assert_bytes_equal")
@@ -12,7 +12,7 @@ sfspec: :init_spec()
   :it("passes when comparing arrays with same elements")
     :assert_bytes_equal 1: a: b
   :it("fails if arrays have different values")
-    :assert_bytes_equal 2: a: b: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+    :assert_bytes_equal 2: a: b: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
 
   :it("can compare large arrays") 
     :assert_bytes_equal 3*256: ascending1: ascending2
@@ -28,7 +28,7 @@ sfspec: :init_spec()
       beq end
       .label dec_value = * + 1
       dec ascending2 - 1
-      :assert_bytes_equal bytes_count: ascending1: ascending2: _64SPEC.assertion_failed_subroutine: _64SPEC.assertion_passed_subroutine
+      :assert_bytes_equal bytes_count: ascending1: ascending2: _128SPEC.assertion_failed_subroutine: _128SPEC.assertion_passed_subroutine
       ldx pos
       .label inc_value = * + 1
       inc ascending2 - 1, X

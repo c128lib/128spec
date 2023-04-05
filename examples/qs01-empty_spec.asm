@@ -1,4 +1,4 @@
-.import source "64spec.asm"
+.import source "128spec.asm"
 
 sfspec: :init_spec()
   
