@@ -24,7 +24,7 @@
 
 .const _128SPEC_VERSION_MAJOR = 0
 .const _128SPEC_VERSION_MINOR = 7
-.const _128SPEC_VERSION_PATCH = 0
+.const _128SPEC_VERSION_PATCH = 1
 
 .function _128spec_version() {
   .return "" + _128SPEC_VERSION_MAJOR + "." + _128SPEC_VERSION_MINOR + "." + _128SPEC_VERSION_PATCH
