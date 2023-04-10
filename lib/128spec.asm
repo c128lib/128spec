@@ -42,7 +42,7 @@
 .const _SETNAM = $FFBD
 .const _CLRCHN = $FFCC
 .const _CLRSCR = $c142
-// .const _PRINTWORD = $bdcd
+.const _PRINTWORD = $8e2e
 .const _CR=13
 .const _CLS = 147
 .const _UPPERCASE = 142
@@ -389,7 +389,7 @@ tests_init:
 .if (_128SPEC.change_text_color && _128SPEC.revert_to_initial_text_color) {
   :_128spec_mov _TEXT_COLOR : _initial_text_color
 }
-  :_set_text_color #_128SPEC.text_color
+:_set_text_color #_128SPEC.text_color
 .if (_128SPEC.change_background_color) {
   :_128spec_mov #_128SPEC.background_color : _BACKGROUND
 }
@@ -399,7 +399,7 @@ tests_init:
 .if (_128SPEC.print_header) {
   :_print_string #sfspec._header
 }
-  :_reset_tests_result(sfspec)
+:_reset_tests_result(sfspec)
 
 .pc = * "Specification"
 specification:
@@ -1016,20 +1016,18 @@ end:
 
 .pseudocommand _print_int8 value {
   ldx value
-  stx $59
+  stx $3b
   lda #0
-  sta $60
-  // jsr _PRINTWORD
-  jsr $8e2e
+  sta $3c
+  jsr _PRINTWORD
 }
 
 .pseudocommand _print_int16 value {
   ldx _128spec_extract_byte_argument(value, 0)
-  stx $59
+  stx $3b
   lda _128spec_extract_byte_argument(value, 1)
-  sta $60
-  // jsr _PRINTWORD
-  jsr $8e2e
+  sta $3c
+  jsr _PRINTWORD
 }
 
 
@@ -1178,14 +1176,14 @@ end_filename:
         .eval lines.add("****** 128spec v" + _128spec_version() + " ******")
           .eval lines.add("Testing Framework by Michal Taszycki")
           .eval lines.add("Porting to c128 by Raffaele Intorcia")
-          .eval lines.add("Docs at https://c128lib.github.io")
           .eval lines.add("Docs at http://64bites.com/64spec")
+          .eval lines.add("Docs at https://c128lib.github.io")
       } else {
         .eval lines.add("****** 128spec v" + _128spec_version() + " ******")
           .eval lines.add("testing framework by michal taszycki")
           .eval lines.add("porting to c128 by raffaele intorcia")
-          .eval lines.add("docs at https://c128lib.github.io")
           .eval lines.add("docs at http://64bites.com/64spec")
+          .eval lines.add("docs at https://c128lib.github.io")
       }
     .byte _CR
       .for (var i = 0; i < lines.size(); i++) {
