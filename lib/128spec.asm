@@ -30,7 +30,7 @@
   .return "" + _128SPEC_VERSION_MAJOR + "." + _128SPEC_VERSION_MINOR + "." + _128SPEC_VERSION_PATCH
 }
 
-.const _TEXT_COLOR = $0286
+.const _TEXT_COLOR = $F1
 .const _BORDER = $d020
 .const _BACKGROUND = $d021
 .const _CHROUT = $ffd2
@@ -41,8 +41,8 @@
 .const _CLOSE = $FFC3
 .const _SETNAM = $FFBD
 .const _CLRCHN = $FFCC
-.const _CLRSCR = $e544
-.const _PRINTWORD = $bdcd
+.const _CLRSCR = $c142
+// .const _PRINTWORD = $bdcd
 .const _CR=13
 .const _CLS = 147
 .const _UPPERCASE = 142
@@ -309,7 +309,15 @@
   }
 }
 
-  :BasicUpstart2(tests_init)
+    .pc = $1c01 "C128 Basic"
+    .word upstartEnd  // link address
+    .word 10   // line num
+    .byte $9e  // sys
+    .text toIntString(tests_init)
+    .byte 0
+upstartEnd:
+    .word 0  // empty link signals the end of the program
+    .pc = $1c0e "Basic End"
 
 .pc = * "Tests Data"
   _version_major: .byte _128SPEC_VERSION_MAJOR
@@ -1008,14 +1016,20 @@ end:
 
 .pseudocommand _print_int8 value {
   ldx value
+  stx $59
   lda #0
-  jsr _PRINTWORD
+  sta $60
+  // jsr _PRINTWORD
+  jsr $8e2e
 }
 
 .pseudocommand _print_int16 value {
   ldx _128spec_extract_byte_argument(value, 0)
+  stx $59
   lda _128spec_extract_byte_argument(value, 1)
-  jsr _PRINTWORD
+  sta $60
+  // jsr _PRINTWORD
+  jsr $8e2e
 }
 
 
@@ -1163,10 +1177,14 @@ end_filename:
       .if (charset_is_lowercase) {
         .eval lines.add("****** 128spec v" + _128spec_version() + " ******")
           .eval lines.add("Testing Framework by Michal Taszycki")
+          .eval lines.add("Porting to c128 by Raffaele Intorcia")
+          .eval lines.add("Docs at https://c128lib.github.io")
           .eval lines.add("Docs at http://64bites.com/64spec")
       } else {
         .eval lines.add("****** 128spec v" + _128spec_version() + " ******")
           .eval lines.add("testing framework by michal taszycki")
+          .eval lines.add("porting to c128 by raffaele intorcia")
+          .eval lines.add("docs at https://c128lib.github.io")
           .eval lines.add("docs at http://64bites.com/64spec")
       }
     .byte _CR
@@ -1179,5 +1197,3 @@ end_filename:
     .byte 0
   }
 }
-
-
