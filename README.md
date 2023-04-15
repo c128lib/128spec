@@ -1,36 +1,44 @@
-# 128spec
+# 128spec - 8502/Commodore128 Testing Framework for KickAssembler
 
-6502/Commodore128 Testing Framework for KickAssembler
-
-## Video introduction
-
-[![Video](docs/022.png?raw=true)](http://64bites.com/episodes/022-tdd-with-128spec/)
 ## Installation
 
-### Recommended way
+### Gradle way
+
+Edit your <code>build.gradle</code> file and add a <code>libFromGitHub</code> to specify 128spec dependency.
+Be sure to add also a <code>viceExecutable = 'x128.exe'</code> because retro-assembler plugin default emulator is c64.
+
+```gradle
+retroProject {
+    viceExecutable = 'x128.exe'
+
+    libFromGitHub "c128lib/128spec", "0.7.2"
+}
+```
+
+### Other way
 
 1. Create a dir for libraries that your KickAssembler projects use.
 2. Get the current version of the 128spec.asm file and put it in this dir along with other libraries. 
-3. Import it in your spec files as <code>.import source "128spec.asm"</code>
+3. Import it in your spec files as <code>#import "128spec.asm"</code>
 4. Make sure to pass option <code>-libdir <path-to-your-libraries-dir></code> when compiling with KickAssembler.
 
 ### If you just want to try it out
 
 1. Get the current version of the 128spec.asm file and put it in the same directory as your spec files.
-2. Import it in your spec files as <code>.import source "128spec.asm"</code>
+2. Import it in your spec files as <code>#import "128spec.asm"</code>
 
 ## Quick Start
 
 #### 1. Create file example_spec.asm
 
 ``` asm
-.import source "128spec.asm"
+#import "128spec.asm"
 
-sfspec: :init_spec()
+sfspec: init_spec()
   
   // TODO: Add assertions here
 
-  :finish_spec()
+  finish_spec()
 ```
 
 ![Empty Spec](docs/qs01-empty.png?raw=true "Empty Spec")
@@ -38,31 +46,32 @@ sfspec: :init_spec()
 #### 2. Add first failing assertion.
 
 ``` asm
-.import source "128spec.asm"
+#import "128spec.asm"
 
-sfspec: :init_spec()
+sfspec: init_spec()
   
-  :assert_a_equal #42
+  lda #0
+  assert_a_equal #42
 
-  :finish_spec()
+  finish_spec()
 ```
 
-![Empty Spec](docs/qs02-fail.png?raw=true "Empty Spec")
+![Empty Spec](docs/qs02-fail.png?raw=true "Test failed")
 
 #### 3. Make it pass
 
 ``` asm
-.import source "128spec.asm"
+#import "128spec.asm"
 
-sfspec: :init_spec()
+sfspec: init_spec()
 
   lda #42
-  :assert_a_equal #42
+  assert_a_equal #42
   
-  :finish_spec()
+  finish_spec()
 ```
 
-![Empty Spec](docs/qs03-pass.png?raw=true "Empty Spec")
+![Empty Spec](docs/qs03-pass.png?raw=true "Test passed")
 
 ## License
 The MIT License (MIT)
