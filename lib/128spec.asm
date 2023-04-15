@@ -39,6 +39,7 @@
 .const _SETLFS = $FFBA
 .const _OPEN = $FFC0
 .const _CLOSE = $FFC3
+.const _SETBNK = $FF68
 .const _SETNAM = $FFBD
 .const _CLRCHN = $FFCC
 .const _CLRSCR = $c142
@@ -1099,7 +1100,7 @@ filename:
   :_128spec_pet_text(string)
   :_128spec_pet_text(",p,w")
 end_filename:
-  
+  _128spec_kernal_setbnk
   :_128spec_kernal_setnam #[end_filename - filename] : #filename
   :_128spec_kernal_setlfs #logical_file_number : #8 : #2
   :_128spec_kernal_open
@@ -1120,6 +1121,11 @@ end_filename:
 }
 
 
+.pseudocommand _128spec_kernal_setbnk {
+  lda #0
+  tax
+  jsr _SETBNK
+}
 .pseudocommand _128spec_kernal_setnam length : string_address {
   lda length
   ldx _128spec_extract_byte_argument(string_address, 0)
