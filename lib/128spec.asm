@@ -1201,3 +1201,5 @@ end_filename:
     .byte 0
   }
 }
+
+#import "helper.asm"
