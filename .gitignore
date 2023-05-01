@@ -3,3 +3,17 @@ bin/
 sketches/
 vice.log
 .source.txt
+*.prg
+*.sym
+*.dbg
+*.vs
+*.specOut
+.asminfo.txt
+
+# Gradle files
+.gradle
+
+# IDE and tool files
+.idea
+.ra
+.vscode
