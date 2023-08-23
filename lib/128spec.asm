@@ -333,6 +333,7 @@ upstartEnd:
   _stored_p: .byte 0
   _initial_text_color: .if (_128SPEC.change_text_color && _128SPEC.revert_to_initial_text_color) .byte 0
   _header: :_128spec_declare_header(_128SPEC.print_header, _128SPEC.change_character_set == "lowercase")
+  _rowCount: .byte 0
 
 .if(!_128SPEC._use_custom_result_all_failed_message) {
   .eval _128SPEC.set("result_all_failed_message", *)
@@ -911,6 +912,9 @@ specification:
 
 .macro it(description) {
   .if (_128SPEC.print_example_description) {
+    .if (!_128SPEC.write_final_results_to_file) {
+        inc sfspec._rowCount
+    }
     jmp end_text
     text:
       .if (_128SPEC.print_immediate_result) {
@@ -924,6 +928,11 @@ specification:
       .text "           " 
       .byte _CR
       .byte 0
+    press_space:
+      .byte _CR
+      :_128spec_pet_text("Press SPACE to continue")
+      .byte _CR
+      .byte 0
     end_text:
       :_finalize_last_example()
       lda sfspec._description_data + 2
@@ -934,7 +943,42 @@ specification:
       :_set_text_color #_128SPEC.text_color
       :_print_string #text
       :_print_string #scoring
+
+      lda sfspec._rowCount
+      cmp #4
+      bne !ExitNow+
+      :_print_string #press_space
+      lda #0
+      sta sfspec._rowCount
+
+      WaitSpacePressed()
+    !ExitNow:
   }
+}
+
+.macro WaitSpacePressed() {
+    lda #%01111111
+    sta MaskOnPortA
+    lda #%00010000
+    sta MaskOnPortB
+    sei
+  !Start:
+    lda #%11111111
+    sta $dc02
+    lda #%00000000
+    sta $dc03
+
+    lda MaskOnPortA
+    sta $dc00
+    lda $dc01
+    and MaskOnPortB
+    bne !Start-
+    cli
+    jmp !+
+
+  MaskOnPortA:    .byte $00
+  MaskOnPortB:    .byte $00
+  !:
 }
 
 .macro _finalize_last_example() {
